@@ -1,0 +1,7 @@
+install laravel
+
+1. Donwload and Instal Xampp
+2. Donwload and Install Composer (set to php.exe)
+3. create folder to project for  (c:/xampp/htdocs/name_project)
+4. execute in cmd: cd xampp/htdocs/project
+5. after run command: composer create-project --prefer-dist laravel/laravel blog
