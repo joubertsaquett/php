@@ -3,14 +3,14 @@ Após instalar, instalar a tradução: https://github.com/Magento2Translations/l
 Fazer o upload dos arquivos para <your magento path>/app/i18n/magento2translations/language_pt_br.
 Após realizar o upload alterar a localização da loja e limpar o cache o magento.
 
-remover erro de indexação:
+remover erro de indexação (SSH):
 php /bin/magento indexer:reindex
 
-Para compilar:
+Para compilar (SSH):
 php -d memory_limit=1G bin/magento setup:di:compile
 php -d memory_limit=1G bin/magento setup:static-content:deploy -f pt_BR
 
-limpar cache:
+limpar cache (SSH):
 php bin/magento cache:flush
 php bin/magento cache:clean
 
@@ -35,7 +35,7 @@ app / design / frontend / [vendor] / [theme] / web / css / local-l.css
 </page>
 -------default_head_blocks.xml--------
 
-Rodar os comandos abaixo
+Rodar os comandos abaixo (SSH)
 1-> rm -rf pub/static/frontend/* pub/static/adminhtml/* var/cache/ var/generation/ var/page_cache/ var/view_preprocessed/ var/composer_home generated/
 2-> php bin/magento setup:upgrade
 3-> php -dmemory_limit=6G bin/magento setup:static-content:deploy -f
