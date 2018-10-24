@@ -1,0 +1,15 @@
+Após instalar, instalar a tradução: https://github.com/Magento2Translations/language_pt_br
+Upload the contents to <your magento path>/app/i18n/magento2translations/language_pt_br.
+The composer files should then be located like this <your magento path>/app/i18n/magento2translations/pt_BR/pt_BR.csv.
+Go to your Magento admin panel and clear the caches.
+
+remover erro de indexação:
+php /bin/magento indexer:reindex
+
+Para compilar:
+php -d memory_limit=1G bin/magento setup:di:compile
+php -d memory_limit=1G bin/magento setup:static-content:deploy -f pt_BR
+
+limpar cache:
+php bin/magento cache:flush
+php bin/magento cache:clean
