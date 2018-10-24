@@ -13,3 +13,33 @@ php -d memory_limit=1G bin/magento setup:static-content:deploy -f pt_BR
 limpar cache:
 php bin/magento cache:flush
 php bin/magento cache:clean
+
+
+CRIAR TEMA
+https://community.magento.com/t5/Installing-Magento-2-x/adding-a-custom-CSS-file-in-Magento-2/td-p/107433
+////criar as estruturas de pasta
+app / design / frontend / [vendor] / [theme] / Magento_Theme / layout
+app / design / frontend / [vendor] / [theme] / web / css
+////criar os arquivos
+app / design / frontend / [vendor] / [theme] / Magento_Theme / layout / default_head_blocks.xml
+app / design / frontend / [vendor] / [theme] / web / css / local-m.css
+app / design / frontend / [vendor] / [theme] / web / css / local-l.css
+
+-------default_head_blocks.xml--------
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../vendor/magento/framework/Module/etc/module.xsd">
+  <head>
+    <css src="css/local-m.css" />
+    <css src="css/local-l.css" media="screen and (min-width: 768px)"/>
+  </head>
+</page>
+-------default_head_blocks.xml--------
+
+Rodar os comandos abaixo
+1-> rm -rf pub/static/frontend/* pub/static/adminhtml/* var/cache/ var/generation/ var/page_cache/ var/view_preprocessed/ var/composer_home generated/
+2-> php bin/magento setup:upgrade
+3-> php -dmemory_limit=6G bin/magento setup:static-content:deploy -f
+4-> chmod -Rf 777 pub/ var/
+5-> php bin/magento cache:clean
+
+
