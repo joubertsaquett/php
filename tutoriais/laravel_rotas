@@ -1,0 +1,2 @@
+Listar Rotas
+php artisan route:list
