@@ -1,0 +1,15 @@
+//Usado para montar hierarquias
+
+//Exemplo de agrupamento
+//Acesso seriam: app/, app/profile, app/about
+Route::prefix('app')->group(function(){
+    Route::get("/", function(){
+        return "Página Principal do APP";
+    });
+    Route::get("profile", function(){
+        return "Página profile";
+    });
+    Route::get("about", function(){
+        return "Página about";
+    });
+});
