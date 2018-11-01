@@ -1,2 +1,38 @@
 Listar Rotas
 php artisan route:list
+
+//Criando uma rota
+Route::get('/ola', function () {
+    return "<H1>Laravel</H1>";
+});
+
+
+//passando um parametro pela rota
+Route::get('/nome/{nome}', function ($nome) {
+    return "<H1>Ola, $nome!</H1>";
+});
+
+//rota com expreção regular /seunomecomregra/NOME/9 - permite aceitar 1 ou mais numeros
+Route::get('/seunomecomregra/{nome}/{n}', function ($nome, $n) {
+    for($i=0; $i < $n; $i++){
+        echo "<H1>Ola, $nome!</H1>";
+    }
+})->where('n','[0-9]+');
+
+
+//rota com expreção /seunomecomregra/NOME/9 
+//- permite aceitar 1 ou mais numeros e nome deve conter letrar maiusculas ou mínusculas
+Route::get('/seunomecomregra/{nome}/{n}', function ($nome, $n) {
+    for($i=0; $i < $n; $i++){
+        echo "<H1>Ola, $nome!</H1>";
+    }
+})->where('n','[0-9]+')->where('nome', '[A-Za-z]+');
+
+// Rota com parametros Opcionais ? na frente da variavel
+Route::get('/seunomesemregra/{nome?}', function ($nome=null) {
+    if(isset($nome)){
+        echo "<H1>Ola, $nome!</H1>";
+    } else {
+        echo "Você não passou nenhum nome!";
+    }
+});
