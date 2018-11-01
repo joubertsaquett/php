@@ -8,7 +8,6 @@ install laravel
 
 Criando um Projeto Laravel
 4. Na pasta desejada execute o programa: composer create-project --prefer-dist laravel/laravel projeto1
+5.  Abrir o diretorio cmd: 'cd projeto1'
 
-3. create folder to project for  (c:/xampp/htdocs/name_project)
-4. execute in cmd: cd xampp/htdocs/project
-5. after run command: composer create-project --prefer-dist laravel/laravel blog
+obs.: verificar o status do servico interno laravel: php artisan server, caso esteja no xampp não é necessario.
