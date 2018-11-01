@@ -2,6 +2,13 @@ install laravel
 
 1. Donwload and Instal Xampp
 2. Donwload and Install Composer (set to php.exe)
+    no cmd o comando 'composer' informa se a instalação está correta.
+3. baixar e instalar o NPM que está no pacote node.js (http://nodejs.org/en/download)
+    no cmd o comando 'npm -v' e 'nove -v' informa se a instalação está correta.
+
+Criando um Projeto Laravel
+4. Na pasta desejada execute o programa: composer create-project --prefer-dist laravel/laravel projeto1
+
 3. create folder to project for  (c:/xampp/htdocs/name_project)
 4. execute in cmd: cd xampp/htdocs/project
 5. after run command: composer create-project --prefer-dist laravel/laravel blog
