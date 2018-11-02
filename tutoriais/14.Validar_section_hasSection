@@ -1,0 +1,4 @@
+//Quando passaos um parametro de uma filho para o PAi, precisamos validar se está chegando informação para exibir
+ @hasSection('minha_secao_produtos')
+    @yield('minha_secao_produtos') 
+@endif
