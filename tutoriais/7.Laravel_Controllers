@@ -1,0 +1,7 @@
+//Criando controladores para ações especifícas (index, store, create, show, update, destroy, edit)
+php artisan make:controller ClienteControlador --resource
+//ao usar o comando php artisan route:list, mostra como usar cada uma das requisições...
+
+
+//Rotas
+Route::resource('/cliente', 'ClienteControlador');
