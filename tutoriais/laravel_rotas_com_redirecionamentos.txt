@@ -1,0 +1,20 @@
+//Direcionamento entre Rotas
+
+//primeiro o parametro que irá receber, depois para onde irá direicionar, protocolo de erro caso falhe
+Route::redirect('/aqui', '/ola', 301);
+
+//usando o champ é necessário mostrar o parametro completo
+Route::redirect('/aqui', '/public/ola', 301);
+
+
+//Chamando uma view
+Route::get('/hello', function () {
+    return view('hello');
+});
+//Chamando uma view de forma simplificada
+Route::view('/hello', 'hello');
+
+
+//Passando parametros para uma View
+Route::view('/viewnome', 'hellonome',
+    ['nome' => 'Nome', 'sobrenome' => 'Sobrenome']);
