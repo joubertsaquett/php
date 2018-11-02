@@ -18,3 +18,11 @@ Route::view('/hello', 'hello');
 //Passando parametros para uma View
 Route::view('/viewnome', 'hellonome',
     ['nome' => 'Nome', 'sobrenome' => 'Sobrenome']);
+
+
+//passando os parametros na URL    
+Route::get('/viewnome/{nome}/sobrenome', function($nome, $n){
+    return view('hellonome', 
+        ['nome' => $nome, 
+        'sobrenome' => $n]);
+});
