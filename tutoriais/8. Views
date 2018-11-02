@@ -1,0 +1,45 @@
+//AS views fica dentro da pasta resources/views e o nome é padrao ex: nome.blade.php
+//para enviar parametros para uma view é necessário informar as variaveis do seguinte modo
+
+//minhaview.blade.php
+<html>
+    <head>
+        <title>Minha Página</title>
+    </head>
+    <body>
+        <h1>Hello, {{$nome}} {{$sobrenome}}</h1>
+    </body>
+</html>
+ 
+ 
+ //enviado pela rota
+ Route::get('/ola', function() {
+    // return view('minhaview', ['nome'=>'Joao Paulo']);
+    // ou
+    return view('minhaview')
+        ->with('nome','Joao')
+        ->with('sobrenome', 'Paulo');
+
+});
+
+
+//ou tambem assim
+Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome) {
+    return view('minhaview')
+        ->with('nome',$nome)
+        ->with('sobrenome', $sobrenome);
+});
+
+
+//ou tambem assim
+Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome) {
+    $parametros = ['nome' => $nome, 'sobrenome' => $sobrenome];
+    return view('minhaview', $parametros);
+});
+
+//ou tambem assim
+//já obtem os elementos em ordem e os adiciona as chaves do array usando compact
+Route::get('/ola/{nome}/{sobrenome}', function($nome, $sobrenome) {
+    return view('minhaview', compact('nome', 'sobrenome'));
+});
+    
