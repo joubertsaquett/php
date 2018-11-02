@@ -9,3 +9,35 @@ Route::post('/rest/imptimir', function(Request $req){
      $idade = $req->input('idade');
     return "Hello $nome ($idade)!! (POST)";
 });
+
+
+//Receber qualquer methodo HTTP na requisição usando any
+Route::any(['get','post'], '/rest/hello2', function(){
+   return "Hello Wold 2";
+});
+
+//Receber somente os metodos HTTP autorizados
+Route::match(['get','post'], '/rest/hello2', function(){
+    return "Hello Wold 2";
+});
+
+//Colocando nome na rota para melhor identifica-las
+Route::get('/produtos', function(){
+    echo "<h1>Produtos</h1>";
+    echo "<ol>";
+    echo "<li>Notebook</li>";
+    echo "<li>Impressora</li>";
+    echo "<li>Mouse</li>";
+    echo "</ol>";
+})->name('meusprodutos');
+
+//Criando um link para uma outra ROTA, informando o NAME da rota eu posso alterar a url dela que o link continua funcionando
+Route::get('/linkprodutos', function(){
+    $url = route('meusprodutos');
+    echo "<a href=\"". $url ."\">Meus Produtos</a>";
+});
+
+//Redirecionando ROTAs
+Route::get("/redirecionarprodutos", function(){
+    return redirect()->route('meusprodutos');
+});
