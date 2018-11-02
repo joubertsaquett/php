@@ -1,0 +1,8 @@
+//Podemos tambem customizar uma chamada de um @component
+//podemos criar no App/Providers/AppServiceProvider.php uma chamada personalizada
+
+//acrescentando: 
+use Illuminate\Supporte\Facades\Blade;
+
+//e dentro do metodo boot inserimos: primeiro o nome do componente e o nome do apelido que o mesmo irá receber
+Blade::component('components.meucomponente','alerta');
