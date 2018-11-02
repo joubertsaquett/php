@@ -1,0 +1,22 @@
+//para desenvolver components precisamos criar a pasta resources/views/components e dentro da pasta criamos o component
+//ex: meucomponente.blade.php
+
+//a tag slot serve para pegar o conteudo passado na chamada
+<div class="alert alert-primary" role="alert">
+  {{$slot}}
+</div>
+
+//exemplo de uma chamada em resources/views/pagina.blade.php
+<html>
+    <head>
+        <title></title>
+        <!--link rel="stylesheet" href="{{ asset('css/app.css') }}"-->
+        <link rel="stylesheet" href="{{ URL::to('css/app.css') }}">
+    </head>
+    <body>
+        @component('components/meucomponente')
+            <strong>Erro: </strong> Sua mensagem de erro.
+        @endcomponent
+        <script src="{{ URL::to('js/app.js') }}" type="text/javascript"></script>
+    </body>
+</html>
