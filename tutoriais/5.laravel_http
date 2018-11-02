@@ -1,0 +1,11 @@
+
+//Enviando parametros pelo HTTP method POST
+use Illuminate\Http\Request;
+
+//na function eu referencio o Request
+Route::post('/rest/imptimir', function(Request $req){
+//na variavel nome eu informo, obter o input chamado nome
+    $nome = $req->input('nome');
+     $idade = $req->input('idade');
+    return "Hello $nome ($idade)!! (POST)";
+});
