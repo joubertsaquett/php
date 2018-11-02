@@ -1,0 +1,56 @@
+//para criar templates é necessário criar uma pasta em resources/views/layout/ ex: app.blade.php
+//Exemplo do conteudo
+<html>
+    <head>
+        <title>Meu Título</title>
+    </head>
+    <body>
+        <div>           
+        </div>
+    </body>
+</html>
+
+
+//e na pasta resources/views/ criar uma arquivo ex: filho.blade.php com o conteudo:
+// layout seria a pasta e app o nome do arquivo
+@extends('layout.app')
+
+
+//EXIBINDO UM CONTEUDO
+//filho.balde.php criamos uma section e o conteudo dela e no layout/app.blade.php devemos chamar essa informação
+@extends('layout.app')
+@section('conteudo')
+    <p>Este é o conteudo do filho</p>
+@endsection
+
+//app.blade.php chamando o conteudo do filho por meio da funçaõ yield
+<html>
+    <head>
+        <title>Meu Título</title>
+    </head>
+    <body>
+        <div>
+            @yield('conteudo')
+        </div>
+    </body>
+</html>
+
+
+
+//Podemos usar tambem de forma resumida em casos de STRINGs
+@section('titulo', 'Minha página - Filho')
+
+
+
+//caso tenhamos uma section no app.blade.php PAI (show para exibir no arquivo PAI)
+@section('barralateral')
+    Está parte é do template PAI
+@show
+
+//podemos sobrescrever pelo tema filho
+@section('barralateral')
+    //@parent
+    Está parte é do FILHO
+@endsection
+//caso eu queira acrescentar ao tema pai é so colocar @parent onde deseja
+
