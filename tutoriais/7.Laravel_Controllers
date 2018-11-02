@@ -5,3 +5,26 @@ php artisan make:controller ClienteControlador --resource
 
 //Rotas
 Route::resource('/cliente', 'ClienteControlador');
+
+
+//Exemplo do controlador recebendo parametros no metodo STORE;
+//retornando um código de sucesso response()
+public function store(Request $request)
+    {
+        $s = "Armazenar: ";
+        $s .= " Nome: ". $request->input('nome');
+        $s .= " Idade: ". $request->input('idade');
+        return response($s, 201);
+    }
+    
+  
+ 
+ 
+ //Criando um novo metodos e enviando POST
+ //rotas
+ Route::post('/cliente/requisitar', 'ClienteControlador@requisitar');
+ 
+ //Controlador
+  public function requisitar(Request $request){
+        echo "nome:" . $request->input('nome');
+    }
