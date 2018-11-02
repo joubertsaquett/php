@@ -1,0 +1,86 @@
+//para instalar o Bootstrap é necessário alterar o package.json no diretorio base do projeto
+//onde nas dependencias devemos alterar da seguinte forma
+
+ "devDependencies": {
+    "axios": "^0.17",
+
+    "bootstrap": "^4.0.0",
+    "popper.js": "^1.12",
+
+    "cross-env": "^5.1",
+    "jquery": "^3.2",
+    "laravel-mix": "^1.0",
+    "lodash": "^4.17.4",
+    "vue": "^2.5.7"
+}
+
+
+//após alterar e salvar, no CMD na pasta do projeto execute o comando:
+npm install
+
+
+//apos instalar,
+//na pasta resources/assets/js/components/app.js podemos comentar as referencias do VUE
+
+//depois vamos rodar o comando abaixo que ira compilar os css e o js:
+npm run dev
+
+
+//caso de erro execute os scripts abaixo:
+npm uninstall bootstrap-sass --save-dev
+npm install bootstrap@4.0.0 --save-dev
+npm install popper.js --save-dev
+npm install
+
+//edite o arquivo /resources/assets/js/bootstrap.js
+try {
+    window.$ = window.jQuery = require('jquery');
+    //window.Popper = require('popper.js');
+    //require('bootstrap-sass');
+    require('bootstrap');
+} catch (e) {}
+
+//////edite o arquivo /resources/assets/app.scss
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+
+///////////////////e no _variables.scss substituia por://////////////////////////
+// Body 
+$body-bg: #f5f8fa;
+// Borders 
+$laravel-border-color: darken($body-bg, 10%);
+$list-group-border: $laravel-border-color;
+$navbar-default-border: $laravel-border-color;
+$panel-default-border: $laravel-border-color;
+$panel-inner-border: $laravel-border-color;
+
+// Brands 
+$brand-primary: #3097D1;
+$brand-info: #8eb4cb;
+$brand-success: #2ab27b;
+$brand-warning: #cbb956;
+$brand-danger: #bf5329;
+// Typography 
+//$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/"; <-- Remove 
+$font-family-sans-serif: "Raleway", sans-serif;
+$font-size-base: 1rem; // <-- Important Change 
+$line-height-base: 1.6;
+$text-color: #636b6f;
+// Navbar 
+$navbar-default-bg: #fff;
+// Buttons 
+$btn-default-color: $text-color;
+// Inputs 
+$input-border: lighten($text-color, 40%);
+$input-border-focus: lighten($brand-primary, 25%);
+$input-color-placeholder: lighten($text-color, 30%);
+// Panels 
+$panel-default-heading-bg: #fff;
+//////////////
+
+//execute o comando novamente
+npm run dev
+//ou
+npm run watch
+
