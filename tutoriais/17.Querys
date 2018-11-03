@@ -1,0 +1,19 @@
+//Para usar o banco de dados nas rotas é necessário acrescentar a lib DB
+use Illuminate\Support\Facades\DB;
+
+//select simples sem condições
+Route::get('/categorias', function(){
+//trazendo os dados atrazes do get()
+    $cats = DB::table('categorias')->get();
+    foreach($cats as $cat){
+        echo "id: " . $cat->id . "; ";
+        echo "nome: " . $cat->nome . "; <br>";
+    }
+    echo "<hr>";
+//pegando uma coluna especifica com o pluck()
+    $nomes = DB::table('categorias')->pluck('nome');
+    foreach($nomes as $nome){
+        echo "$nome <br>";
+    }
+
+});
