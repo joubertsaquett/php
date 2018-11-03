@@ -1,0 +1,26 @@
+// iniciando uma instalação na pasta desejada:
+composer create-project --prefer-dist "laravel/laravel" vendas
+
+
+//Logo após e necessário configurar o ambiente do Laravel, no diretório base configure o arquivo .env
+
+
+//para criar um migration use o comando:
+php artisan make:migration criar_tabela_produtos
+//será criado em database/migrations
+//os metodos criado UP e DOWN server para UP serve para CRIAR tabelas/campos... e o DOWn server para apagar
+
+// Criando uma tabela
+php artisan make:migration criar_tabela_produtos --create=produtos
+
+//ao editar o arquivo de migração os tipos devem ser informados como função ex:
+ Schema::create('produtos', function (Blueprint $table) {
+      $table->increments('id');
+      $table->string('nome');
+      $table->float('preco');
+      $table->integer('estoque');
+      $table->timestamps();
+  });
+  
+  //para criar as tabelas
+  php artisan migrate
