@@ -40,3 +40,22 @@ foreach($cats as $cat){
     echo "id: " . $cat->id . "; ";
     echo "nome: " . $cat->nome . "; <br>";
 }
+
+
+echo "<p>Sentenças logicas representa o comando AND</p>";
+$cats = DB::table('categorias')->where([
+    ['id',1],
+    ['nome','Roupas']
+])->get();
+foreach($cats as $cat){
+    echo "id: " . $cat->id . "; ";
+    echo "nome: " . $cat->nome . "; <br>";
+}
+
+
+echo "<p>Ordenando por nome.</p>";
+$cats = DB::table('categorias')->orderBy('nome','desc')->get();
+foreach($cats as $cat){
+    echo "id: " . $cat->id . "; ";
+    echo "nome: " . $cat->nome . "; <br>";
+}
