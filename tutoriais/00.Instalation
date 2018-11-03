@@ -1,0 +1,36 @@
+composer create-project --prefer-dist "laravel/laravel" 6cadastro
+
+//Realizar o passoa a passo 11. do bootstrap 4
+
+//criar o arquivo e pasta com o conteudo
+resources/views/layout/app.blade.php
+<html>
+    <head>
+        <title>Cadastro de Produtos</title>
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    </head>
+    <body>
+        <div class="container">
+            <main role="main">
+                @hasSection('body')
+                    @yield('body')
+                @endif
+            </main>
+        </div>
+        <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
+    </body>
+</html>
+
+
+//Dentro de resources/views/ criar o arquivo index.blade.php
+//irá pegar o layout pai e criar a section body
+@extends('layout.app')
+@section('body')
+    <h1>Hello</h1>
+@endsection
+
+//alterar a rota web.php para index
+Route::get('/', function () {
+    return view('index');
+});
