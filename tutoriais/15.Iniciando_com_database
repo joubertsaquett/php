@@ -27,3 +27,25 @@ php artisan make:migration criar_tabela_produtos --create=produtos
   
   //voltar o ultimo script
   php artisan migrate:rollback
+  
+  
+ //adicionando campos a uma tabela já criada
+php artisan make:migration adicionar_categoria_id_em_produto --table=categorias
+
+//no arquivo gerado inserir o codigo abaixo, onde a primeira linha informa que é um inteiro que é uma chave
+//e na segunda linha de onde a chave primaria vem para ser extrangeira
+$table->integer('categoria_id')->unsigned();
+$table->foreign('categoria_id')->references('id')->on('categorias');
+
+
+//apagar todas as tabelas do banco de dados e começar do zero
+php artisan migrate:fresh
+
+//desfazer todas as alterações (fica somente a tabela de migrations)
+php artisan migrate:reset
+
+//verifica as alterações feitas no banco, quais executaram ou não
+php artisan migrate:status
+
+//adicionar uma alteração no banco
+php artisan make:migration teste
