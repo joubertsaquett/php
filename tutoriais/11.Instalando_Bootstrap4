@@ -14,7 +14,6 @@
     "vue": "^2.5.7"
 }
 
-
 //após alterar e salvar, no CMD na pasta do projeto execute o comando:
 npm install
 
@@ -25,8 +24,7 @@ npm install
 //depois vamos rodar o comando abaixo que ira compilar os css e o js:
 npm run dev
 
-
-//caso de erro execute os scripts abaixo:
+//////////////////////////////////////caso de erro execute os scripts abaixo://////////////////////////////////
 npm uninstall bootstrap-sass --save-dev
 npm install bootstrap@4.0.0 --save-dev
 npm install popper.js --save-dev
