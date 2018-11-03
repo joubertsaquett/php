@@ -1,0 +1,61 @@
+//Criando um projeto
+composer create-project --prefer-dist "laravel/laravel" 5modelos
+
+//Criando um modelo, usando o –m ele já cria os migrations
+php artisan make:model Categoria -m
+//o modelo é criado em app/ e os migratios ficam em database/migations
+
+
+
+
+
+Route::get('/', function () {
+    //return view('welcome');
+    $categorias = Categoria::all();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br> ";
+    }
+});
+
+
+Route::get('/inserir/{nome}', function($nome){
+    $cat = new Categoria();
+    $cat->nome = $nome;
+    $cat->save();
+});
+
+
+Route::get('/categoria/{id}', function($id){
+    $cat = Categoria::findOrFail($id);
+    if(isset($cat)){
+        echo "id: " . $cat->id . ", ";
+        echo "nome: " . $cat->nome . "<br> "; 
+    } else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }
+});
+
+
+
+Route::get('/atualizar/{id}/{nome}', function($id, $nome){
+    $cat = Categoria::find($id);
+    if(isset($cat)){ 
+        $cat->nome = $nome;
+        $cat->save();
+        return redirect('/');
+    } else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }
+});
+
+
+Route::get('/remover/{id}', function($id){
+    $cat = Categoria::find($id);
+    if(isset($cat)){ 
+        $cat->delete();
+        return redirect('/');
+    } else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }
+});
