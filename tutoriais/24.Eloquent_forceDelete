@@ -1,0 +1,11 @@
+//APAGAR  PERMANENTEMENTE
+Route::get('/apagarpermanete/{id}', function($id){
+    $cat = Categoria::withTrashed()->find($id);
+    if(isset($cat)){
+        $cat->forceDelete();
+        echo "Apagado permanente id: " . $cat->id . ", ";
+        echo "nome: " . $cat->nome . "<br> "; 
+    } else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }
+});
