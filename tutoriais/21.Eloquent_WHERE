@@ -1,0 +1,31 @@
+//select pesquisando o nome de uma categoria
+Route::get('/categoriapornome/{nome}', function($nome){
+    $categorias = Categoria::where('nome',$nome)->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br> ";
+    }
+});
+
+//select no campo id onde o id >= ao informado na url, tambem informa o count e o max
+Route::get('/categoriaidmaiorque/{id}', function($id){
+    $categorias = Categoria::where('id', '>=' ,$id)->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br> ";
+    }
+    $count = Categoria::where('id', '>=' ,$id)->count();
+    echo "<h1>Count: $count</h1>";
+    $max = Categoria::where('id', '>=' ,$id)->max('id');
+    echo "<h1>Count: $max</h1>";
+
+});
+
+//trazendo ids préselecionado
+Route::get('/ids123', function(){
+    $categorias = Categoria::find([1,2,5]);
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br> ";
+    }
+});
