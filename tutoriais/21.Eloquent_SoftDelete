@@ -1,0 +1,51 @@
+//para usar o softDelete é necesário que um campo a mais seja criado.
+//no arquivo do migratio deve ser adicionado
+$table->softDeletes();
+
+//após apagar a tabela e recriar novamente.
+//e na classe de manipulação acrescentar o código
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+//e dentro da classe 
+use SoftDeletes;
+protected $dates = ['deleted_at'];
+
+
+//ao deletar o campo deleted_at é preenchido
+//como pesquisar todos mesmo deletados (withTrashed()->get();)
+Route::get('/todas', function () { 
+    $categorias = Categoria::withTrashed()->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome;
+        if($c->trashed()){
+            echo 'Apagado';
+        }
+        echo "<br> ";
+    }
+});
+
+//visualizar deletados e não deletados
+Route::get('/ver/{id}', function($id){
+    //$cat = Categoria::withTrashed()->find($id);
+    $cat = Categoria::withTrashed()->where('id', $id)->get()->first();
+    if(isset($cat)){
+        echo "id: " . $cat->id . ", ";
+        echo "nome: " . $cat->nome . "<br> "; 
+    } else {
+        echo "<h1>Categoria não encontrada</h1>";
+    }
+});
+
+//somente deletados
+Route::get('/somenteapagadas', function () { 
+    $categorias = Categoria::onlyTrashed()->get();
+    foreach($categorias as $c){
+        echo "id: " . $c->id . ", ";
+        echo "nome: " . $c->nome . "<br> ";
+        if($c->trashed()){
+            echo 'Apagado';
+        }
+    }
+});
+
