@@ -1,0 +1,15 @@
+//Criar registros de exemplo: database/seeds
+php artisan make:seeder CategoriasSeeder
+
+//Após criado o SEEDER podemos acrescentar os registros dentro do metodo run
+DB::table('categorias')->insert(['nome' => 'Roupas']);
+DB::table('categorias')->insert(['nome' => 'Eletronicos']);
+DB::table('categorias')->insert(['nome' => 'Perfumes']);
+DB::table('categorias')->insert(['nome' => 'Móveis']);
+
+//após configurar os registros
+//no arquivo DatabaseSeeder.php referencie o seeder
+$this->call(CategoriasSeeder::class);
+
+//para inserir os registro use o comando:
+php artisan db:seed
