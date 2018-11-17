@@ -12,14 +12,7 @@ php artisan migrate:flush
 
 //instalar o passport
 php artisan passport:install
-C:\xampp\htdocs\api>php artisan passport:install
-Encryption keys generated successfully.
-Personal access client created successfully.
-Client ID: 1
-Client Secret: LOhl83EGiADTRSj9UXVoq85k9HXqwWDUgKfnBDsh
-Password grant client created successfully.
-Client ID: 2
-Client Secret: LC1AwsPGeK1dW1d4mmyQyi9sExrrHG7P8dY9EFNX
+
 
 
 //editar o arquivo app/user.php
