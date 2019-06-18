@@ -1,189 +1,44 @@
-<?php
-
-get_header();
-$metas  	= get_post_meta($post->ID);
-$metas_acf	= maybe_unserialize($metas['acf_metas'][0]);
-
-?>
-	<link rel="stylesheet" href="<?php echo get_site_url(); ?>/wp-content/themes/divena/assets/css/embed.css">
-	<div  id="" class="ui column grid stackable margin left fifty important margin right fifty important margin-mobile-zero important slideshow">
-		<div class="row top aligned padding top zero important">
-			<div class="ui column sixteen wide computer margin bottom fifty important">
-				<div id="content-embed" class="ui row grid stackable top aligned padding-100 important">
-					<?PHP 
-						$paged = (get_query_var('paged')) ? absint( get_query_var('paged') ) : 1; 
-
-						$args = array(
-							'post_type' => 'mediacenter', 
-							'post_status' => 'publish',
-							'posts_per_page' => 9,
-							'paged' => $paged,
-						);
-
-						$novo_loop = new WP_Query($args);
-						if ( $novo_loop->have_posts() ){	
-							foreach (  $novo_loop->posts  AS $post){
-								$metas 		= get_post_meta($post->ID);
-								$metas_acf	= $metas['url'][0];
-					?>
-								<div id="player___<?PHP echo $metas_acf;?>" onClick="prepareIframe(this.id);" class="player">
-									<img class="play" src="<?php echo get_site_url(); ?>/wp-content/themes/divena/images/play.png">
-									<img class="margin bottom-30 important tumbnail" src="https://img.youtube.com/vi/<?PHP echo $metas_acf; ?>/maxresdefault.jpg">
-								</div>
-								
-					
-								
-					<?php
-							} // endforeach
-							echo '<div id="allJobsModal">';
-							foreach (  $novo_loop->posts  AS $post){
-								$metas 		= get_post_meta($post->ID);
-								$metas_acf	= $metas['url'][0];
-					?>
-									<div class="hytPlayerWrapOuter modal" id="modal_<?PHP echo $metas_acf; ?>" style="width: 1px; height: 1px; overflow: hidden;">
-										<div id="modalMovie_1" class="hytPlayerWrap modal-content"> 
-											<iframe id="iframe_id" width="640" height="360" src="https://www.youtube.com/embed/<?PHP echo $metas_acf; ?>?rel=0&enablejsapi=1&theme=dark&autohide=2&modestbranding=1&showinfo=0" frameborder="0" ></iframe>
-										</div>
-									</div>
-						<?PHP
-							}// endforeach
-							echo "</div>";
-						} else {
-							echo 'Nenhum seminovo encontrado com o termo buscado.';
-						}
-						
-					?>
-					<style type="text/css">
-						.hytPlayerWrap.modal-content {
-							display: flex;
-							justify-content: center;
-						    align-items: center;
-						}
-						.hytPlayerWrap.modal-content.ended {
-							width: 640px;
-							height: 360px;
-						}
-					</style>
-					<script> 
-						$('body').prepend($('#allJobsModal'));
-						function prepareIframe(idMovie){
-							var content = idMovie.split('___'); 
-							var id = "modal_" + content[1];
-
-							var modal = document.querySelector("#" + id).classList.toggle("show-modal"); 
-							document.getElementById(id).style = null;
-
-							$('#' + id).on(
-								'click',
-								function(e) {
-									if(!$(e.target).hasClass('ended'))
-									{
-										document.querySelector("#" + id).classList.toggle("show-modal");
-									}
-								}
-							);
-
-						}
-							"use strict";
-							document.addEventListener('DOMContentLoaded', function() {
-								// Activate only if not already activated
-								if (window.hideYTActivated) return;
-								// Activate on all players
-								let onYouTubeIframeAPIReadyCallbacks = [];
-								for (let playerWrap of document.querySelectorAll(".hytPlayerWrap")) {
-									let playerFrame = playerWrap.querySelector("iframe");
-									
-									let tag = document.createElement('script');
-									tag.src = "https://www.youtube.com/iframe_api";
-									let firstScriptTag = document.getElementsByTagName('script')[0];
-									firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-									
-									let onPlayerStateChange = function(event) {
-										if (event.data == YT.PlayerState.ENDED) {
-											playerWrap.classList.add("ended");
-										} else if (event.data == YT.PlayerState.PAUSED) {
-											playerWrap.classList.add("paused");
-										} else if (event.data == YT.PlayerState.PLAYING) {
-											playerWrap.classList.remove("ended");
-											playerWrap.classList.remove("paused");
-										}
-									};
-									
-									let player;
-									onYouTubeIframeAPIReadyCallbacks.push(function() {
-										player = new YT.Player(playerFrame, {
-											events: {
-												'onStateChange': onPlayerStateChange
-											}
-										});
-									});
-								
-									playerWrap.addEventListener("click", function() {
-										let playerState = player.getPlayerState();
-										if (playerState == YT.PlayerState.ENDED) {
-											player.seekTo(0);
-										} else if (playerState == YT.PlayerState.PAUSED) {
-											player.playVideo();
-										}
-									});
-								}
-								
-								window.onYouTubeIframeAPIReady = function() {
-									for (let callback of onYouTubeIframeAPIReadyCallbacks) {
-										callback();
-									}
-								};
-								
-								window.hideYTActivated = true;
-							});
-							// $('#modalMovie_<?PHP echo $metas_acf ;?>').modal('show');
-						// }
-					</script>
-
-					<div class="ui sixteen wide column stackable padding-50 important right aligned">
-						<div class="pagination_div">
-							<div class="margin-mobile-zero important margin twelve fifty important pagination">
-								<?php
-									echo paginate_links( array(
-										'format'  => 'page/%#%',
-										'current' => $paged,
-										'total'   => $novo_loop->max_num_pages,
-										'mid_size'        => 2,
-										'prev_text'       => __('&lt;'),
-										'next_text'       => __('&gt;')
-									) );
-								?>
-							</div>
-						</div>
-					</div>
-					
-				</div>                        
-			</div>
-		</div>
-	</div>
-	
-	
-<?php 
-get_footer();
-?>
-
-
-
-
-
-
-
+</style>
+.embed-container {
+    max-width: 100%;  
+} 
+.player{
+    position: relative;
+    /* display: inline-block; */
+    display: flex;
+    width: 33%;
+    justify-content: center;
+    align-items: center;
+    -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+}
+.player:hover{
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+}
+.align_c{
+    text-align: center;
+}
+.tumbnail{
+    width: 100%;
+    cursor: pointer;
+     
+}
+.play{
+    cursor: pointer;
+    position: absolute;
+}
 
 
 .modal {
-    /* position: fixed; */
-    position: absolute;
+    position: fixed;
+    /* position: absolute; */
     z-index: 99;
     top: 0%;
     left: 0%;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     opacity: 0;
     visibility: hidden;
     transform: scale(1.1);
@@ -218,6 +73,16 @@ get_footer();
     background-color: lightgray;
 }
 
+
+.hytPlayerWrap.modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hytPlayerWrap.modal-content.ended {
+    width: 640px;
+    height: 360px;
+}
 
 .hytPlayerWrap{
     display: inline-block;
@@ -254,3 +119,262 @@ get_footer();
     background-size: 64px 64px;
     background-image: url(data:image/svg+xml;utf8;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEiIHdpZHRoPSIxNzA2LjY2NyIgaGVpZ2h0PSIxNzA2LjY2NyIgdmlld0JveD0iMCAwIDEyODAgMTI4MCI+PHBhdGggZD0iTTE1Ny42MzUgMi45ODRMMTI2MC45NzkgNjQwIDE1Ny42MzUgMTI3Ny4wMTZ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+);
 }  */
+   
+
+.ui.modal>.content.movie{
+    padding: 0px !important;
+    background: #000;
+}
+
+#content-embed{
+    background: #fff;
+}
+
+@media ( min-width: 1025px ){
+    iframe{
+        /* width: 100%;
+        height: 500px; */
+        margin-bottom: -4px !important;
+    }
+}
+
+@media ( max-width: 1024px){
+    #content-embed{
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    iframe{
+        /* width: 100%;
+        height: 500px;  */
+        margin-bottom:-4px !important;
+    }
+}
+
+@media ( max-width: 500px){
+    #content-embed{
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    iframe{
+        /* width: 100%;
+        height: 500px;  */
+        margin-bottom: -4px !important;
+    }
+}
+
+
+
+/*Pagination*/
+.pagination_div{
+	width: auto;
+    display: inline-block;
+}
+.pagination .page-numbers {
+	/* color: #fff; */
+	display: block;
+	float: left;
+	margin: 4px 4px 4px 0;
+	padding: 15px 18px 14px 18px;
+	text-decoration: none;
+ }  
+ .pagination .page-numbers:hover {
+	background: #5c5c5c;
+	color: #fff;
+	text-decoration: none;
+ }
+ .pagination .current {
+	background: #5c5c5c;
+	color: #fff;
+	padding: 15px 18px 14px 18px;
+ }
+ /*Pagination*/
+</style>
+
+
+
+
+
+
+
+<?PHP 
+	$paged = (get_query_var('paged')) ? absint( get_query_var('paged') ) : 1; 
+
+	$args = array(
+		'post_type' => 'mediacenter', 
+		'post_status' => 'publish',
+		'posts_per_page' => 9,
+		'paged' => $paged,
+	);
+
+	$novo_loop = new WP_Query($args);
+	if ( $novo_loop->have_posts() ){	
+		foreach (  $novo_loop->posts  AS $post){
+			$metas 		= get_post_meta($post->ID);
+			$metas_acf	= $metas['url'][0];
+?>
+			<div id="player___<?PHP echo $metas_acf;?>" onClick="prepareIframe(this.id);" class="player">
+				<img class="play" src="<?php echo get_site_url(); ?>/wp-content/themes/divena/images/play.png">
+				<img class="margin bottom-30 important tumbnail" src="https://img.youtube.com/vi/<?PHP echo $metas_acf; ?>/maxresdefault.jpg">
+			</div>
+
+
+
+<?php
+		} // endforeach
+		echo '<div id="allJobsModal">';
+		foreach (  $novo_loop->posts  AS $post){
+			$metas 		= get_post_meta($post->ID);
+			$metas_acf	= $metas['url'][0];
+?>
+				<div class="hytPlayerWrapOuter modal" id="modal_<?PHP echo $metas_acf; ?>" style="width: 1px; height: 1px; overflow: hidden;">
+					<div id="modalMovie_1" class="hytPlayerWrap modal-content"> 
+						<p class="align_c">
+							<iframe id="iframe_id" width="640" height="360" src="https://www.youtube.com/embed/<?PHP echo $metas_acf; ?>?rel=0&enablejsapi=1&theme=dark&autohide=2&modestbranding=1&showinfo=0" frameborder="0" ></iframe>
+							<span style="display: none; color: #fff;" id="error_modal_<?PHP echo $metas_acf; ?>">O vídeo está sendo executado! Para fechar pause o mesmo!</span>
+						</p>
+					</div>
+				</div>
+	<?PHP
+		} // endforeach
+		echo "</div>";
+	} else {
+		echo 'Nenhum seminovo encontrado com o termo buscado.';
+	}
+
+?>
+<script> 
+	// copiar todos os iframes para o inicio do body
+	$('body').prepend($('#allJobsModal'));
+
+	function prepareIframe(idMovie){
+		var content = idMovie.split('___'); 
+		var id = "modal_" + content[1];
+		//exibir modal
+		var modal = document.querySelector("#" + id).classList.toggle("show-modal"); 
+		//limpar style do modal
+		document.getElementById(id).style = null;							
+	}
+
+	 $('.hytPlayerWrapOuter').on(
+		'click',
+		function(e) {
+			var id = $(this).attr('id');
+			// console.log(id);
+			// console.log(e.target);
+			console.log("ended", $(e.target).hasClass('ended'));
+			console.log("paused", $(e.target).hasClass('paused'));
+			console.log("playing", $(e.target).hasClass('playing'));
+
+			var ended = $(e.target).hasClass('ended');
+			var paused = $(e.target).hasClass('paused');
+			var playing = $(e.target).hasClass('playing');
+
+			if( !ended && paused && !playing)
+			{
+				console.log("1");
+				//ocultar modal
+				document.querySelector("#" + id).classList.toggle("show-modal");
+				//alerta de pausar o vídeo
+				document.querySelector("#error_" + id).style.display = 'none';
+
+			} else if( !ended && !paused && playing)
+			{
+				console.log("2");
+				//alerta de pausar o vídeo
+				document.querySelector("#error_" + id).style.display = 'block';
+
+			} else if( !ended && !paused && !playing){
+				console.log("3");
+				//ocultar modal
+				document.querySelector("#" + id).classList.toggle("show-modal");
+				//alerta de pausar o vídeo
+				document.querySelector("#error_" + id).style.display = 'none';
+
+			} else {
+				console.log(4);
+				//alerta de pausar o vídeo
+				document.querySelector("#error_" + id).style.display = 'block';
+
+			}
+
+
+		}
+	);
+
+		"use strict";
+		document.addEventListener('DOMContentLoaded', function() {
+			// Activate only if not already activated
+			if (window.hideYTActivated) return;
+			// Activate on all players
+			let onYouTubeIframeAPIReadyCallbacks = [];
+			for (let playerWrap of document.querySelectorAll(".hytPlayerWrap")) {
+				let playerFrame = playerWrap.querySelector("iframe");
+
+				let tag = document.createElement('script');
+				tag.src = "https://www.youtube.com/iframe_api";
+				let firstScriptTag = document.getElementsByTagName('script')[0];
+				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+				playerWrap.classList.add("paused");
+
+				let onPlayerStateChange = function(event) {
+					if (event.data == YT.PlayerState.ENDED) {
+						playerWrap.classList.add("ended");
+						playerWrap.classList.remove("playing");
+					} else if (event.data == YT.PlayerState.PAUSED) {
+						playerWrap.classList.add("paused");
+						playerWrap.classList.remove("playing");
+					} else if (event.data == YT.PlayerState.PLAYING) {
+						playerWrap.classList.add("playing");
+						playerWrap.classList.remove("ended");
+						playerWrap.classList.remove("paused");
+					}
+				};
+
+				let player;
+				onYouTubeIframeAPIReadyCallbacks.push(function() {
+					player = new YT.Player(playerFrame, {
+						events: {
+							'onStateChange': onPlayerStateChange
+						}
+					});
+				});
+
+				playerWrap.addEventListener("click", function() {
+					let playerState = player.getPlayerState();
+					if (playerState == YT.PlayerState.ENDED) {
+						player.seekTo(0);
+					} else if (playerState == YT.PlayerState.PAUSED) {
+						player.playVideo();
+					}
+				});
+			}
+
+			window.onYouTubeIframeAPIReady = function() {
+				for (let callback of onYouTubeIframeAPIReadyCallbacks) {
+					callback();
+				}
+			};
+
+			window.hideYTActivated = true;
+		});
+		// $('#modalMovie_<?PHP echo $metas_acf ;?>').modal('show');
+	// }
+</script>
+
+<div class="ui sixteen wide column stackable padding-50 important right aligned">
+	<div class="pagination_div">
+		<div class="margin-mobile-zero important margin twelve fifty important pagination">
+			<?php
+				echo paginate_links( array(
+					'format'  => 'page/%#%',
+					'current' => $paged,
+					'total'   => $novo_loop->max_num_pages,
+					'mid_size'        => 2,
+					'prev_text'       => __('&lt;'),
+					'next_text'       => __('&gt;')
+				) );
+			?>
+		</div>
+	</div>
+</div>
